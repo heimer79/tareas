@@ -33,7 +33,7 @@ export const crearTodoHtml = (todo) => {
 	const div = document.createElement('div');
 	div.innerHTML = htmlTodo;
 
-	divTodoList.append(div);
+	divTodoList.append(div.firstElementChild);
 
 	return div;
 };
