@@ -63,3 +63,17 @@ txtInput.addEventListener('keyup', (event) => {
 		txtInput.value = '';
 	}
 });
+/*/ escucha el evento click para recopilar el nombre del elementp tocado luego obtener el parent es decir el LI que se inserto previamente en el anterior listener, luego de obtenerlo se extrae el attributo data id para guadarlo en una constante e ingresarlo en la instancia del todolist de la clase TodoList. el elemnto todoElement cambia con el toogle segun se vaya clickeando el divTodoList poniendo o quitando la clase completed del LI */
+divTodoList.addEventListener('click', (event) => {
+	const elementName = event.target.localName; // shows the html element name
+	const todoElement = event.target.parentElement.parentElement;
+	const todoId = todoElement.getAttribute('data-id');
+
+	// click en el check
+	if (elementName.includes('input')) {
+		todoList.marcarCompletado(todoId);
+		todoElement.classList.toggle('completed');
+	}
+
+	console.log(todoList);
+});
