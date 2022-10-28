@@ -18,8 +18,9 @@ export const saludar = (nombre) => {
 import {Todo} from '../classes';
 import {todoList} from '../index';
 
-const divTodoList = document.querySelector('.todo-list');
-const txtInput = document.querySelector('.new-todo');
+const divTodoList = document.querySelector('.todo-list'); // ul que contiene las tareas creadas
+const txtInput = document.querySelector('.new-todo'); // input de las tareas
+const btnBorrar = document.querySelector('.clear-completed'); //boton de Borrar todos los completedos
 
 export const crearTodoHtml = (todo) => {
 	const htmlTodo = `<li class="${
@@ -80,4 +81,18 @@ divTodoList.addEventListener('click', (event) => {
 	}
 
 	console.log(todoList);
+});
+
+// evento que escucha el boton de borrar completados
+btnBorrar.addEventListener('click', () => {
+	todoList.eliminarCompletados(); // metodo de la clases TodoList para eliminar los elmentos del arrary completados es decir que tienen ese atributo de la clase en true
+
+	// Este for recorre todo el UL y sus hijos li para eliminar los elmentos que cumplen las condiciones de clase completed
+	for (let i = divTodoList.children.length - 1; i >= 0; i--) {
+		const element = divTodoList.children[i];
+
+		if (element.classList.contains('completed')) {
+			divTodoList.removeChild(element);
+		}
+	}
 });

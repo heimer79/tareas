@@ -30,5 +30,13 @@ export class TodoList {
 		}
 	}
 
-	eliminarCompletados() {}
+	eliminarCompletados() {
+		/* Utilizamos la mis logica de eliminar los todos individuales 
+		pero esta vez lo hacemos para los completados por los cual vamos a evaluar 
+		los que tienen ese artibuto al momento de pasar por el metodo de la presente
+		clase.lo que hace el filtro es devolver los que no estan completado eliminando
+		los que si lo estan es deci completados */
+
+		this.todos = this.todos.filter((todo) => todo != todo.completado);
+	}
 }
