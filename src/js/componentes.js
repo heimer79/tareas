@@ -73,6 +73,10 @@ divTodoList.addEventListener('click', (event) => {
 	if (elementName.includes('input')) {
 		todoList.marcarCompletado(todoId);
 		todoElement.classList.toggle('completed');
+	} else if (elementName.includes('button')) {
+		// hay que borrar el todo
+		todoList.eliminarTodo(todoId);
+		divTodoList.removeChild(todoElement); //elimina el elemento del html en este caso pues el <li> previamente creado
 	}
 
 	console.log(todoList);
