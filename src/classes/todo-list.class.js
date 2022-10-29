@@ -1,14 +1,18 @@
+import {Todo} from './todo.class';
+
 /* >>>>>
 clase to do list para hacer todo el ciclo de vida de la tarea
 en un listado de eventos de la misma.
 <<<<< */
 export class TodoList {
 	constructor() {
-		this.todos = [];
+		/* this.todos = []; */
+		this.cargarLocalStorage();
 	}
 
 	nuevoTodo(todo) {
 		this.todos.push(todo);
+		this.guardarLocalStorage();
 	}
 
 	eliminarTodo(id) {
@@ -17,6 +21,7 @@ export class TodoList {
 		en este caso que el ID que se recibe de la tarea o todo sea diferente su ID del que esta entrando, toda esta instrucción va a regresar Un nuevo arreglo excluyendo el todo que coincida con el ID que tengo entonces este nuevo arreglo se va a almacenar en el this.todos sobreescribiendo cada uno de esos valores, dando la impresion de que se está eliminando.
 		 */
 		this.todos = this.todos.filter((todo) => todo.id != id);
+		this.guardarLocalStorage();
 	}
 
 	marcarCompletado(id) {
@@ -25,6 +30,7 @@ export class TodoList {
 			console.log(id, todo.id);
 			if (todo.id == id) {
 				todo.completado = !todo.completado; // cambia segun sea el caso. como es boolean se mueve entre true y false.
+				this.guardarLocalStorage();
 				break;
 			}
 		}
@@ -38,5 +44,26 @@ export class TodoList {
 		los que si lo estan es deci completados */
 
 		this.todos = this.todos.filter((todo) => todo != todo.completado);
+		this.guardarLocalStorage();
+	}
+
+	guardarLocalStorage() {
+		localStorage.setItem('todo', JSON.stringify(this.todos));
+	}
+
+	cargarLocalStorage() {
+		/* if (localStorage.getItem('todo')) {
+			this.todos = JSON.parse(localStorage.getItem('todo'));
+		} else {
+			this.todos = [];
+		} */
+
+		this.todos = localStorage.getItem('todo')
+			? JSON.parse(localStorage.getItem('todo'))
+			: [];
+
+		/* this.todos = this.todos.map((obj) => Todo.fromJson(obj)); */
+
+		this.todos = this.todos.map(Todo.fromJson);
 	}
 }

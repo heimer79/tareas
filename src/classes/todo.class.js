@@ -4,10 +4,23 @@ que se vaya creando, esta asu vez tiene los atributos de la misma
 <<<<< */
 
 export class Todo {
+	static fromJson({id, tarea, completado, creado}) {
+		const tempTodo = new Todo(tarea);
+
+		tempTodo.id = id;
+		tempTodo.completado = completado;
+		tempTodo.creado = creado;
+
+		return tempTodo;
+	}
 	constructor(tarea) {
 		this.tarea = tarea;
 		this.id = new Date().getTime(); //se usa getTime para generar un numero aleatorio de ID
 		this.completado = false; // es falso de inicio porque no se han hecho
 		this.creado = new Date();
+	}
+
+	imprimirClase() {
+		console.log(`${this.tarea} - ${this.id}`);
 	}
 }
