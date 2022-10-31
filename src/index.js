@@ -13,8 +13,8 @@ console.log(todoList.todos);
 	con solo el nombre no mas */
 todoList.todos.forEach(crearTodoHtml);
 
-const newTodo = new Todo('Aprender javascript');
-todoList.nuevoTodo(newTodo);
+/* const newTodo = new Todo('Aprender javascript');
+todoList.nuevoTodo(newTodo); */
 
 todoList.todos[0].imprimirClase();
 

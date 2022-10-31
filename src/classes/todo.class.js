@@ -4,6 +4,9 @@ que se vaya creando, esta asu vez tiene los atributos de la misma
 <<<<< */
 
 export class Todo {
+	/* se utiliza un metodo estatico el cual no depende de la instancia sino directamente de
+	la clase en este caso Todo, este metodo lo que hara es mantener o recoger lo almacenado 
+	en localstorage para que se guarde el metodo usado, por ejemplo imprimir clase */
 	static fromJson({id, tarea, completado, creado}) {
 		const tempTodo = new Todo(tarea);
 
