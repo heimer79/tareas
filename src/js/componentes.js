@@ -21,6 +21,8 @@ import {todoList} from '../index';
 const divTodoList = document.querySelector('.todo-list'); // ul que contiene las tareas creadas
 const txtInput = document.querySelector('.new-todo'); // input de las tareas
 const btnBorrar = document.querySelector('.clear-completed'); //boton de Borrar todos los completedos
+const ulFiltros = document.querySelector('.filters'); // filtros de las tareas <ul class="filters">
+const anchorFiltros = document.querySelectorAll('.filtro'); //selecciona todos los elementos Li debajo de <ul class="filters"> con la clase filtro es slector all porque devuelve un arreglo
 
 export const crearTodoHtml = (todo) => {
 	const htmlTodo = `<li class="${
@@ -93,6 +95,36 @@ btnBorrar.addEventListener('click', () => {
 
 		if (element.classList.contains('completed')) {
 			divTodoList.removeChild(element);
+		}
+	}
+});
+
+// evento que escucha todos los click sobre el <ul class="filters"> para devlver el nombre
+ulFiltros.addEventListener('click', (event) => {
+	const filtro = event.target.text; //obtiene el nombre del filtro
+	if (!filtro) return; // valida lo anterior si no hay filtro o no obtiene un nombre
+
+	anchorFiltros.forEach((element) => element.classList.remove('selected')); // recorre los li hijos de <ul class="filters"> para quitarles la clase selected
+	event.target.classList.add('selected'); // agrega la clase selected al que este activo en ese momento
+
+	// recorre todos los hijos del divTodoList todas las tareas que estan creadas
+	for (const element of divTodoList.children) {
+		element.classList.remove('hidden'); //retira la clase hidden antes de empezar
+		const completado = element.classList.contains('completed'); //valida que un elemento tenga la clase completed para meterlo en una constante que sera usada mas adelante
+
+		// este switch verifica que texto hay en la constante filtro previamente declarada
+
+		switch (filtro) {
+			case 'Pendientes': // si tiene el nombre Pendientes y si esta completado poner hidden
+				if (completado) {
+					element.classList.add('hidden');
+				}
+				break;
+			case 'Completados': // si tiene el nombre completados y si no tien e la clase completed pues poner hidden
+				if (!completado) {
+					element.classList.add('hidden');
+				}
+				break;
 		}
 	}
 });
